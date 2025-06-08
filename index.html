@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Codebase IDE | Emmet, File Tree, SEO Debug</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.44.0/min/vs/loader.js"></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "./state.js": "./state.js",
+        "./fileManager.js": "./fileManager.js",
+        "./uiManager.js": "./uiManager.js",
+        "./editorManager.js": "./editorManager.js",
+        "./seoManager.js": "./seoManager.js",
+        "./mobileSidebar.js": "./mobileSidebar.js",
+        "./main.js": "./main.js"
+      }
+    }
+  </script>
+</head>
+<body class="h-full">
+<div class="min-h-screen flex flex-col bg-[#0f172a]">
+  <header class="p-4 pb-2 border-b border-slate-800 bg-[#0f172a] flex items-center justify-between z-50 relative">
+    <div class="flex items-center gap-2">
+      <!-- Mobile sidebar toggle -->
+      <button id="sidebarToggle" class="md:hidden text-blue-400 hover:text-blue-300 focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+      </button>
+      <h1 class="text-2xl font-bold text-blue-400">⚡ IDE + File Manager + Emmet</h1>
+    </div>
+    <button onclick="window.addFileDialog()" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded font-semibold text-white ml-4">+ Add File</button>
+  </header>
+  <main class="flex flex-1 min-h-0 overflow-hidden relative">
+    <!-- File tree sidebar -->
+    <aside id="fileTreeSidebar" class="bg-[#181f2e] border-r border-slate-800 w-64 md:w-64 p-3 flex flex-col flex-shrink-0 md:static fixed top-0 left-0 h-full z-50 transition-transform duration-300 ease-in-out sidebar-hidden md:sidebar-visible" aria-label="File tree">
+      <div class="flex justify-between mb-2 items-center">
+        <span class="text-lg text-blue-200 font-semibold">File Explorer</span>
+        <div class="flex gap-1">
+            <button onclick="window.addFileDialog()" title="Add file to root" class="text-blue-400 hover:text-blue-300 text-xl font-bold px-2">+</button>
+            <button onclick="window.addFolderDialog()" title="Add folder to root" class="text-blue-400 hover:text-blue-300 text-xl font-bold px-2">📁</button>
+        </div>
+      </div>
+      <ul id="fileTree" class="text-sm text-blue-100 overflow-y-auto flex-grow"></ul>
+    </aside>
+
+    <!-- Overlay for mobile sidebar -->
+    <div id="sidebarOverlay" class="sidebar-overlay md:hidden"></div>
+
+    <!-- Editor & right pane -->
+    <section class="flex-1 flex flex-col min-w-0 bg-[#0f172a]">
+      <!-- Editor tabs -->
+      <div id="tabs" class="flex border-b border-slate-700 bg-[#1e2332] px-2 py-1 gap-2 overflow-x-auto flex-shrink-0"></div>
+      <!-- Monaco editor -->
+      <div id="editor" class="my-2 mx-2 flex-grow"></div>
+      <!-- Buttons -->
+      <div class="flex flex-wrap gap-2 mt-2 mx-2 justify-center md:justify-start">
+        <button onclick="window.saveFile()" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded font-semibold text-white">💾 Save</button>
+        <button onclick="window.deleteCurrentFile()" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded font-semibold text-white">🗑️ Delete</button>
+        <button onclick="window.renameCurrentFile()" class="bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded font-semibold text-white">✏️ Rename</button>
+        <button onclick="window.runSEO()" class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded font-semibold text-white">🔍 SEO/Accessibility Audit</button>
+      </div>
+      <!-- Output/SEO Panel -->
+      <div class="flex flex-col md:flex-row gap-3 my-4 mx-2">
+        <div class="flex-1 bg-[#1e293b] rounded-xl p-4 card-shadow min-h-[160px]">
+          <h2 class="text-blue-200 font-semibold mb-2">Rendered Output</h2>
+          <iframe id="outputFrame" class="w-full h-56 bg-white rounded shadow" sandbox="allow-same-origin allow-scripts"></iframe>
+        </div>
+        <div class="flex-1 bg-[#1e293b] rounded-xl p-4 card-shadow min-h-[160px]">
+          <h2 class="text-blue-200 font-semibold mb-2">SEO & Accessibility Report</h2>
+          <div id="seoReport" class="text-base overflow-y-auto max-h-56"></div>
+        </div>
+      </div>
+      <div id="errors" class="bg-red-900 text-pink-200 rounded-md border border-red-500 p-3 mx-2 mb-2 hidden"></div>
+    </section>
+  </main>
+</div>
+<!-- Axe-core CDN remains here -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axe-core/4.8.2/axe.min.js"></script>
+<!-- Main application script - loads modules -->
+<script type="module" src="main.js"></script>
+</body>
+</html>
