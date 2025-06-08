@@ -1,0 +1,126 @@
+/* --- Refactored from index.html --- */
+
+/* @tweakable editor height */
+#editor { 
+  height: 450px; 
+  min-height: 320px; 
+  border-radius: 10px; 
+  border: 2px solid #334155; 
+}
+
+/* @tweakable rendered output iframe height */
+#outputFrame {
+    height: 56; /* Adjusted value in Tailwind classes, overriding here if needed */
+    min-height: 160px; /* Match parent container min-height for smaller screens */
+    background: white;
+    border-radius: 0.5rem; /* rounded */
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); /* shadow */
+}
+
+::-webkit-scrollbar { 
+  width: 0; 
+  background: transparent; 
+}
+
+html, body { 
+  height: 100%; 
+}
+body { 
+  font-family: 'Inter', sans-serif; 
+  background: #0f172a; 
+  color: #cbd5e1; /*slate-300*/ 
+}
+
+/* General UI Elements */
+.bg-[#0f172a] { 
+  background-color: #0f172a; 
+} /* slate-900 */
+.bg-[#181f2e] { 
+  background-color: #181f2e; 
+} /* Custom dark slate for sidebar */
+.bg-[#1e2332] { 
+  background-color: #1e2332; 
+} /* Custom darker slate for tabs */
+.bg-[#1e293b] { 
+  background-color: #1e293b; 
+} /* slate-800 */
+.border-slate-800 { 
+  border-color: #1e293b; 
+}
+.border-slate-700 { 
+  border-color: #334155; 
+}
+.text-blue-400 { 
+  color: #60a5fa; 
+} /* Tailwind blue-400 */
+.text-blue-300 { 
+  color: #93c5fd; 
+} /* Tailwind blue-300 */
+.text-blue-200 { 
+  color: #bfdbfe; 
+} /* Tailwind blue-200 */
+.text-blue-100 { 
+  color: #dbeafe; 
+} /* Tailwind blue-100 */
+.text-white { 
+  color: #ffffff; 
+}
+.text-red-400 { 
+  color: #f87171; 
+} /* Tailwind red-400 */
+.text-red-300 { 
+  color: #fca5a5; 
+} /* Tailwind red-300 */
+.text-green-400 { 
+  color: #4ade80; 
+} /* Tailwind green-400 */
+.text-green-300 { 
+  color: #86efac; 
+} /* Tailwind green-300 */
+.text-pink-200 { 
+  color: #fbcfe8; 
+} /* Tailwind pink-200 */
+
+/* Custom styles for mobile sidebar */
+.sidebar-hidden {
+  transform: translateX(-100%);
+}
+.sidebar-visible {
+  transform: translateX(0);
+}
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 40; /* Below sidebar, above main content */
+    display: none; /* Hidden by default */
+}
+/* Show overlay when sidebar is visible */
+.sidebar-visible ~ .sidebar-overlay {
+    display: block;
+}
+
+/* File tree & Drag/Drop */
+.draggable { 
+  cursor: grab; 
+}
+.drag-over { 
+  background: #1e293b !important; 
+} /* slate-800 */
+
+/* Card Shadow for Panels */
+.card-shadow { 
+  box-shadow: 0 2px 16px 0 rgba(27,32,50,0.07); 
+}
+
+/* SEO Report specific styles */
+#seoReport ul {
+    list-style: disc;
+    padding-left: 1.25rem; /* pl-5 */
+}
+#seoReport li {
+    margin-bottom: 0.25rem; /* Small spacing */
+}
